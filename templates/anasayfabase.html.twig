@@ -1,0 +1,20 @@
+<!DOCTYPE html> <!-- anasayfanın iskelet sayfası -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Anasayfaya Hoşgeldiniz!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block description %}En iyi online otel rezervasyon sistemi{% endblock %}">
+        <meta name="keywords" content="{% block keywords %}Otel,Tatil,Rezervasyon{% endblock %}">
+        <meta name="author" content="Burcu Balcı">
+        {% block head%}{% include ('anasayfa/head.html.twig') %}{% endblock %}
+    </head>
+    <body>
+        {% block header %}{% include ('anasayfa/header.html.twig') %}{% endblock %}
+        {% block slider %} {% endblock %}
+        {% block body %} {% endblock %}
+        {% block footer %}{% include ('anasayfa/footer.html.twig') %}{% endblock %}
+        {% block javascript %}{% include ('anasayfa/javascript.html.twig') %}{% endblock %}
+
+    </body>
+</html>

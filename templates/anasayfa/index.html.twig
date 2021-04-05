@@ -1,0 +1,90 @@
+{% extends 'anasayfabase.html.twig' %}
+
+{% block title %}{{ data[0].title }}{% endblock %}
+{% block description %}{{ data[0].description }}{% endblock %}
+{% block keywords %}{{ data[0].keywords }}{% endblock %}
+{% block slider %}{% include ('anasayfa/slider.html.twig') %}{% endblock %}
+{% block body %}
+    <section id="maincontent">
+        <div class="container">
+
+            <div class="row">
+                <div class="span12">
+                    <div class="call-action">
+
+                        <div class="text">
+                            <h2>You should love this stand out call action</h2>
+                            <p>
+                                Hover this call action box and see the call action button play nice animation to seek attention
+                            </p>
+                        </div>
+                        <div class="cta">
+                            <a class="btn btn-large btn-theme" href="#">
+                                <i class="icon-plane icon-white"></i> Get a quote </a>
+                        </div>
+
+                    </div>
+                    <!-- end tagline -->
+                </div>
+            </div>
+
+            <div class="row">
+                {%  for hotel in hotelresim %}
+                    <div class="span3 features e_pulse">
+                        <img src="{{ asset('uploads/images/' ~ hotel.image ) }}" style="height: 100px; width:200px" alt="" />
+                        <div class="box">
+                            <div class="divcenter">
+                                <a href="{{ path('kullanici_hotel_show' , {'id': hotel.id}) }}"><i class="icon-circled icon-48 icon-magic active icon"></i></a>
+                                <h4>{{ hotel.title }} <br />{{ hotel.country }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <h4 class="rheading">Recent works<span></span></h4>
+                    <div class="row">
+                        <div class="span3">
+
+                            <p class="hidden-phone">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in lacus rhoncus elit egestas luctus. Nullam at lectus augue.
+                            </p>
+
+                            <a href="#" class="btn btn-theme">Read More</a>
+                        </div>
+
+                        <div class="span9">
+                            <div id="latest-work" class="carousel btleft">
+                                <div class="carousel-wrapper">
+                                    <ul class="da-thumbs">
+                                        {%  for hotel in newhotelresim %}
+                                            <li>
+                                                <img src="{{ asset('uploads/images/' ~ hotel.image ) }}" style="height: 150px; width:200px" alt="" />
+                                                <article class="da-animate da-slideFromRight">
+                                                    <a data-pretty="prettyPhoto" href="{{ asset('uploads/images/' ~ hotel.image ) }}">
+                                                        <i class="icon-zoom-in icon-rounded icon-48 active"></i>
+                                                    </a>
+                                                    <a href="{{ path('kullanici_hotel_show' , {'id': hotel.id}) }}">
+                                                        <i class="icon-link icon-rounded icon-48 active"></i>
+                                                    </a>
+                                                    <div class="hidden-tablet">
+                                                        <p>{{ hotel.title }}</p>
+                                                    </div>
+                                                </article>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends 'anasayfabase.html.twig' %}
+
+{% block title %}{{ hotel.title }}{% endblock %}
+{% block keywords %}{{ hotel.keywords }}{% endblock %}
+{% block description %}{{ hotel.description }}{% endblock %}
+{% block body %}
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin(windowURL, windowName, windowFeatures) {      window.open(windowURL, windowName , windowFeatures) };
+    </SCRIPT>
+<section id="subintro">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="#">Otel Ayrıntıları</a><i class="icon-angle-right"></i></li>
+                    <li class="active">{{ hotel.title }}</li>
+                </ul>
+            </div>
+            <div class="span4">
+                <div class="search">
+                    <form class="input-append">
+                        <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                        <button class="btn btn-dark" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="maincontent">
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <div id="mainslider" class="flexslider">
+                    <ul class="slides">
+                        <li data-thumb="{{ asset('uploads/images/' ~ hotel.image ) }}" style="height: 400px">
+                            <a class="zoom" data-pretty="prettyPhoto" href="{{ asset('uploads/images/' ~ hotel.image ) }}">
+                                <img class="zoom" data-pretty="prettyPhoto" src="{{ asset('uploads/images/' ~ hotel.image ) }}" style="height: 400px; width:940px " alt=""/>
+                            </a>
+                            <div class="flex-caption primary" style="height: 15px">
+
+                                <h2>{{ hotel.title }}</h2>
+                            </div>
+
+                        </li>
+                        {% for rs in otelresim %}
+                            <li data-thumb="{{ asset('uploads/images/' ~ rs.image ) }}" style="height: 400px">
+                                <a class="zoom" data-pretty="prettyPhoto" href="{{ asset('uploads/images/' ~ rs.image ) }}">
+                                <img class="zoom" data-pretty="prettyPhoto" src="{{ asset('uploads/images/' ~ rs.image ) }}" style="height: 400px; width:940px " alt=""/>
+                                </a>
+                                <div class="flex-caption primary" style="height: 15px">
+                                    <h2>{{ rs.title }}</h2>
+                                </div>
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+                            <h3>{{ hotel.title }}</h3>
+                        </div>
+                        <div class="row">
+
+                            <div class="span8">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th>Açıklama</th>
+                                        <td>{{ hotel.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Yıldız Sayısı</th>
+                                        <td>{{ hotel.star }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Adres</th>
+                                        <td>{{ hotel.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Telefon</th>
+                                        <td>{{ hotel.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fax</th>
+                                        <td>{{ hotel.fax }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ hotel.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Şehir</th>
+                                        <td>{{ hotel.city }}/{{ hotel.country }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+        </div>
+
+            <div class="tabbable tabs-top">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#one" data-toggle="tab"><i class="icon-briefcase"></i>Odalar ve Fiyatlar</a></li>
+                    <li><a href="#two" data-toggle="tab">Ayrıntılar</a></li>
+                    <li><a href="#three" data-toggle="tab">Yorumlar</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="one">
+                            <table class="table table-bordered"><!--bu tabloyu templaten aldım. table class ismini alıp buraya yapıştırdım-->
+                                <thead>
+                                <tr>
+                                    <th>Oda Adı</th>
+                                    <th>Açıklamalar</th>
+                                    <th>Oda Resimleri</th>
+                                    <th>Ücret</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for rs in room %}
+                                        <tr>
+                                            <td>{{ rs.title }}</td>
+                                            <td>{{ rs.description|raw}}</td>
+                                            <td><img src="{{ asset('uploads/images/' ~ rs.image ) }}" style="width:170px;height:170px"></td>
+                                            <td><b>{{ rs.price }}TL</b></td>
+                                            <td>
+                                                <form  method="post" action="{{ path('user_new_reservation', {'rid': rs.id , 'hid': rs.hotelid}) }}" role="form" >
+
+                                                    Kalma Süresi: <input type="number" id="days" name="days" value="1" style="width:140px"/><br>
+                                                    Rezervasyon Tarihi: <input type="date" id="checkin" name="checkin" style="width:140px" required /><br>
+                                                    <input type="submit" value="Oda Rezerve Et" class="btn btn-success">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="16">Sonuç Bulunmadı.</td>
+                                            </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                    </div>
+                    <div class="tab-pane" id="two">
+                        <p>
+                          {{ hotel.detail|raw }}
+                        </p>
+                    </div>
+                    <div class="tab-pane" id="three">
+                        <ul class="media-list">
+                            {% for rs in yorumgoster %}
+                                <li class="media">
+                                    {% if rs.image == NULL %}
+                                        <img class="media-object" src=" {{ asset('uploads/images/avatar.png') }}" style="height: 50px; width:45px " alt="" />
+                                    {% else %}
+                                        <img class="media-object" src="{{ asset('uploads/images/' ~ rs.image ) }}" style="height: 50px; width:45px " alt="" />
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <h5 class="media-heading">{{ rs.subject }}</h5>
+                                        {% if rs.rate==1 %}
+                                            <i class="icon-heart"></i>
+                                        {% endif %}
+                                        {% if rs.rate==2 %}
+                                            <i class="icon-heart"></i><i class="icon-heart"></i>
+                                        {% endif %}
+                                        {% if rs.rate==3 %}
+                                            <i class="icon-heart"></i><i class="icon-heart"></i><i class="icon-heart"></i>
+                                        {% endif %}
+                                        {% if rs.rate==4 %}
+                                            <i class="icon-heart"></i><i class="icon-heart"></i><i class="icon-heart"></i><i class="icon-heart"></i>
+                                        {% endif %}
+                                        {% if rs.rate==5 %}
+                                            <i class="icon-heart"></i> <i class="icon-heart"></i> <i class="icon-heart"></i> <i class="icon-heart"></i> <i class="icon-heart"></i>
+                                        {% endif %}
+
+                                        <span></span>
+                                        <p>
+                                           {{ rs.comment|raw }}
+                                        </p>
+
+                                        <a href="#" class="reply">Yanıtla</a>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="comment-post">
+                            {% if app.user %}
+                                {{  include('anasayfa/messages.html.twig') }}
+                                <h4>Yorum Yap!</h4>
+                                <form  class="comment-form"  name="comment" action="{{ path('user_new_comment',{'id':hotel.id}) }}" method="post" role="form">
+                                    <div class="row">
+                                        <div class="span4">
+                                            <label>Konu <span>*</span></label>
+                                            <input type="text" class="input-block-level" name="comment[subject]" id="comment_subject"  placeholder="Konu" />
+                                        </div>
+                                        <div class="span4">
+                                            <label>Oy Ver <span>*</span></label>
+                                            <select class="input-block-level" name="comment[rate]" id="comment_rate">
+                                                <option></option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="span8">
+                                            <label>Yorum <span>*</span></label>
+                                            <textarea class="input-block-level" name="comment[comment]" id="comment_comment"  rows="9"  placeholder="Yorum Yaz.."></textarea>
+
+                                            <input type="hidden" name="token" value="{{  csrf_token('comment') }}" />
+                                            <button class="btn btn-theme" type="submit">Gönder</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% else %}
+                                <li>
+                                    <a href="/loginuser"><i class="icon-lock"></i> Yorum Yapmak İçin Giriş Yap</a>
+                                </li>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+{% endblock %}

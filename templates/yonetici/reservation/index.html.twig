@@ -1,0 +1,91 @@
+{% extends 'yoneticibase.html.twig' %}
+
+{% block title %}Yönetici Rezervasyon Sayfası{% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4>Yeni Rezervasyonlar</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Anasayfa</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Kullanıcı Adı</th>
+                            <th>Otel Adı</th>
+                            <th>Oda Adı</th>
+                            <th>İsim</th>
+                            <th>Soyisim</th>
+                            <th>Başlangıç Tarihi</th>
+                            <th>Çıkış Tarihi</th>
+                            <th>Kalış Süresi</th>
+                            <th>Toplam Ücret</th>
+                            <th>Durum</th>
+                            <th>Oluşturulma Zamanı</th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.username }} {{ reservation.usersurname }}</td>
+                            <td>{{ reservation.hotelname }}</td>
+                            <td>{{ reservation.roomname }}</td>
+                            <td>{{ reservation.name }}</td>
+                            <td>{{ reservation.surname }}</td>
+                            <td>{{ reservation.checkin ? reservation.checkin|date('d-m-Y') : '' }}</td>
+                            <td>{{ reservation.checkout ? reservation.checkout|date('d-m-Y') : '' }}</td>
+                            <td>{{ reservation.days }}</td>
+                            <td>{{ reservation.total }}</td>
+                            <td>{{ reservation.status }}</td>
+                            <td>{{ reservation.created_at ? reservation.created_at|date('d-m-Y') : '' }}</td>
+
+                            <td>
+                                <a href="{{ path('reservation_show', {'id': reservation.id}) }}" class="btn btn-block btn-info btn-sm">Göster</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('reservation_edit', {'id': reservation.id}) }}" class="btn btn-block btn-info btn-sm">Düzenle</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('reservation_delete', {'id': reservation.id}) }}" class="btn btn-block btn-info btn-sm">Sil</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="19">Sonuç Bulunamadı</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+

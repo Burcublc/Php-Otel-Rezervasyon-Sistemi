@@ -1,0 +1,87 @@
+{% extends 'anasayfabase.html.twig' %}
+{% block title %}İletişim|{{ data[0].title }}{% endblock %}
+{% block keywords %}{{ data[0].keywords }}{% endblock %}
+{% block description %}{{ data[0].description }}{% endblock %}
+{% block body %}
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="/anasayfs"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li class="active">İletişim</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <aside>
+
+                        <div class="spacer30">
+                        </div>
+
+                        <div id="sendmessage">Your message has been sent. Thank you!</div>
+                        <div id="errormessage"></div>
+                        {{  include('anasayfa/messages.html.twig') }}
+                        <h3>İLETİŞİM FORMU</h3>
+
+                        <form name="messages" method="post" role="form" class="contactForm">
+                            <div class="row">
+                                <div class="span4 form-group">
+                                    <input type="text" name="messages[name]" class="input-block-level"  id="messages_name" placeholder="İsim" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    <div class="validation"></div>
+                                </div>
+
+                                <div class="span4 form-group">
+                                    <input type="email" class="input-block-level" name="messages[email]" id="messages_email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="span4 form-group">
+                                    <input type="text" class="input-block-level" name="messages[subject]" id="messages_subject" placeholder="Konu" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="span4 form-group">
+                                    <textarea class="input-block-level" id="messages_message" name="messages[message]" rows="5" data-rule="required" data-msg="Lütfen bir şey yazın" placeholder="Mesaj"></textarea>
+                                    <div class="validation"></div>
+                                    <div class="text-center">
+                                        <input type="hidden" name="token" value="{{  csrf_token('form-messeage') }}" /> <!--csrf kontrolü..çünkü dışarıdan bir veri giriliyor-->
+                                        <button class="btn btn-theme" type="submit">Mesajı Gönder</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </aside>
+                </div>
+                <div class="span6">
+                    <div class="widget">
+                        <ul class="social-links">
+                            <li><a href="{{ data[0].twitter}}" title="Twitter"><i class="icon-square icon-32 icon-twitter"></i></a></li>
+                            <li><a href="{{ data[0].facebook}}" title="Facebook"><i class="icon-square icon-32 icon-facebook"></i></a></li>
+                            <li><a href="{{ data[0].instagram }}" title="İnstagram"><i class="icon-square icon-32 icon-google-plus"></i></a></li>
+                            <li><a href="#" title="Linkedin"><i class="icon-square icon-32 icon-linkedin"></i></a></li>
+                            <li><a href="#" title="Pinterest"><i class="icon-square icon-32 icon-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        {{ data[0].contact|raw }}
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

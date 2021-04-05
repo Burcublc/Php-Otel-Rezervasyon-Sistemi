@@ -1,0 +1,93 @@
+{% extends 'anasayfabase.html.twig' %}
+
+{% block title %}Rezervasyon Ayrıntıları{% endblock %}
+{% block body %}
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">Blog</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Blog with left sidebar</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                            {{ include('user/usermenu.html.twig') }}
+
+
+                <div class="span8">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+                            <h4></h4>
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+                                <div class="table">
+                                    <table>
+                                        <tr>
+                                            <th>Otel İsim</th>
+                                            <td>{{ reservation[0].hotelname }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Oda İsim</th>
+                                            <td>{{ reservation[0].roomname }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Giriş Tarihi</th>
+                                            <td>{{ reservation[0].checkin ? reservation[0].checkin|date('d-m-Y ') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Çıkış Tarihi</th>
+                                            <td>{{ reservation[0].checkout ? reservation[0].checkout|date('d-m-Y ') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kalma Süresi</th>
+                                            <td>{{ reservation[0].days }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Toplam Ücret</th>
+                                            <td>{{ reservation[0].total }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mesaj</th>
+                                            <td>{{ reservation[0].message }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Not</th>
+                                            <td>{{ reservation[0].note }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Durum</th>
+                                            <td>{{ reservation[0].status }}</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="{{ path('user_reservations') }}" class="btn-primary">Geri dön</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

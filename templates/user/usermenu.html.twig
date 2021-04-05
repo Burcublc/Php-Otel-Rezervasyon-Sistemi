@@ -1,0 +1,15 @@
+<div class="span4">
+    <aside>
+        <div class="widget">
+            <h4 class="rheading">Kullanıcı Bilgileri<span></span></h4>
+            <img src="{{asset('uploads/images/' ~ app.user.image)}}" style="height:80px"> {{ app.user.name }} {{ app.user.surname }}
+            <ul class="cat">
+                <li><a href="/user">Profilim</a></li>
+                <li><a href="/user/hotel">Otellerim</a></li>
+                <li><a href="/user/comments">Yorumlarım</a></li>
+                <li><a href="/user/reservations">Rezervasyonlarım</a></li>
+                <li><a href="/logout">Çıkış</a></li>
+            </ul>
+        </div>
+    </aside>
+</div>

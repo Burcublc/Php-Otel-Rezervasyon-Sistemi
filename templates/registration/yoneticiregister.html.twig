@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include ('yonetici/yoneticianasayfa/head.html.twig') %}
+
+</head>
+<body class="hold-transition register-page">
+    <div class="col-md-6">
+        <div class="register-logo ">
+            <a href="../../index2.html"><b>Admin</b>LTE</a>
+        </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg"><h5>Üye Kaydetme Sayfası</h5></p>
+
+                    {{ form_start(registrationForm) }}
+                        {{ form_widget(registrationForm) }}
+                        <div class="col-md-6">
+                            <button class="btn btn-block btn-primary">{{ button_label|default('Kaydet') }}</button>
+                        </div>
+                    {{ form_end(registrationForm) }}
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- jQuery -->
+    <script src="{{ asset('assets') }}/yonetici/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('assets') }}/yonetici/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('assets') }}/yonetici/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+
+
+</body>
+</html>
+

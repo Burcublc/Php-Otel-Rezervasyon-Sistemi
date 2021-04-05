@@ -1,0 +1,132 @@
+{% extends 'anasayfabase.html.twig' %}
+
+{% block title %}{{ app.user.name }}|Profil{% endblock %}
+{% block body %}
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">Rezervasyon</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Blog with left sidebar</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+                {{ include('user/usermenu.html.twig') }}
+                <div class="span8">
+                    <article class="blog-post">
+                        <div class="post-heading">
+
+                            <div class="span6">
+                                <h4 class="rheading">İLETİŞİM FORMU<span></span></h4>
+                                <table class="table">
+                                    <tr>
+                                        <th>Otel İsim</th>
+                                        <td>{{ hotel.title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Oda İsim</th>
+                                        <td>{{ room.title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ücret</th>
+                                        <td>{{ room.price }}TL</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Başlangıç Tarihi</th>
+                                        <td>{{ data.checkin |date("d/m/Y") }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Çıkış Tarihi</th>
+                                        <td>{{ data.checkout |date("d/m/Y") }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Toplam Süre</th>
+                                        <td>{{ data.days }}Gün</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Toplam Ücret</th>
+                                        <td>{{ data.total }}TL</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+
+                                <form name="reservation" method="post" role="form" class="contactForm">
+                                    <div class="row">
+                                        <div class="span4 form-group">
+                                            <input type="text" name="reservation[name]" class="input-block-level"  id="reservation_name" value="{{ app.user.name }}" placeholder="İsim" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" name="reservation[surname]" class="input-block-level"  id="reservation_surname" value="{{ app.user.surname }}" placeholder="Soyisim"  />
+                                            <div class="validation"></div>
+                                        </div>
+
+                                        <div class="span4 form-group">
+                                            <input type="email" class="input-block-level" name="reservation[email]" id="reservation_email" value="{{ app.user.email }}" placeholder="Email"  />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="input-block-level" name="reservation[phone]" id="reservation_phone" placeholder="Telefon"/>
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <textarea class="input-block-level" id="reservation_message" name="reservation[message]" rows="5" placeholder="Mesaj Yazın...."></textarea>
+                                            <div class="validation"></div>
+
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="hidden" id="checkin" name="checkin" value="{{ data.checkin | date("d/m/Y")}}">
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="hidden" id="checkout" name="checkout" value="{{ data.checkout | date("d/m/Y")}}">
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="hidden" id="days" name="days" value="{{ data.days }}">
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <div class="text-center">
+                                                <input type="hidden" name="token" value="{{  csrf_token('roomreservation') }}" /> <!--csrf kontrolü..çünkü dışarıdan bir veri giriliyor-->
+                                                <button class="btn btn-theme" type="submit">Rezervasyon Yap</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+

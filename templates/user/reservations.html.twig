@@ -1,0 +1,95 @@
+{% extends 'anasayfabase.html.twig' %}
+
+{% block title %}Rezervasyonlarım{% endblock %}
+{% block body %}
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">Blog</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Blog with left sidebar</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                            {{ include('user/usermenu.html.twig') }}
+
+
+                <div class="span8">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Otel İsim</th>
+                                        <th>Oda İsim</th>
+                                        <th>Giriş Tarihi</th>
+                                        <th>Çıkış Tarihi</th>
+                                        <th>Kalma Süresi</th>
+                                        <th>Toplam Ücret</th>
+                                        <th>Mesaj</th>
+                                        <th>Not</th>
+                                        <th>Durum</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for reservation in reservations %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path("kullanici_hotel_show",{"id":reservation.hotelid}) }}">
+                                                    {{ reservation.hotelname }}
+                                                </a>
+                                            </td>
+                                            <td>{{ reservation.roomname }}</td>
+                                            <td>{{ reservation.checkin ? reservation.checkin|date('Y-m-d') : '' }}</td>
+                                            <td>{{ reservation.checkout ? reservation.checkout|date('Y-m-d') : '' }}</td>
+                                            <td>{{ reservation.days }}</td>
+                                            <td>{{ reservation.total }}</td>
+                                            <td>{{ reservation.message }}</td>
+                                            <td>{{ reservation.note }}</td>
+                                            <td>{{ reservation.status }}</td>
+                                            <td>
+                                                <a href="{{ path('user_reservationshow', {'id': reservation.id}) }}" class="btn-primary">Göster</a>
+
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="19">Sonuç Bulunamadı</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

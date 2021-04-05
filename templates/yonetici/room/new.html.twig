@@ -1,0 +1,137 @@
+<link rel="stylesheet" href="{{ asset('assets') }}/yonetici/plugins/fontawesome-free/css/all.min.css">
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+<link rel="stylesheet" href="{{ asset('assets') }}/yonetici/dist/css/adminlte.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<div class="card card-primary">
+    <font size="6" color="#a52a2a" ><b>{{ hotel.title }}</b></font>
+    <hr>
+
+    <form role="form" name="room" action="{{ path('room_new',{'id':id}) }}" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Oda İsim</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"  id="room_title" name="room[title]" maxlength="50">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Açıklama</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"  id="room_description" name="room[description]" maxlength="50">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Ücret</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"  id="room_price" name="room[price]" maxlength="50">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Oda Sayısı</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"  id="room_numberofroom" name="room[numberofroom]" maxlength="50">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Durum</label>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control" name="room[status]" id="room_status">
+                        <option>Aktif</option>
+                        <option>Pasif</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Oda Resim Galerisi</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="custum-file">
+                            <input class="custom-file-input" type="file"  id="room_image" name="room[image]" >
+                            <label class="custom-file-label" for="exampleInputFile">Dosya Seç</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="hidden" name="token" value="{{  csrf_token('roomy') }}" />
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Oda İsim</th>
+        <th>Otel No</th>
+        <th>Açıklamalar</th>
+        <th>Resim</th>
+        <th>Ücret</th>
+        <th>Durum</th>
+        <th>Sil</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for rs in rooms %}
+            <tr>
+                <td>{{ rs.id }}</td>
+                <td>{{ rs.title }}</td>
+                <td>{{ rs.hotelid }}</td>
+                <td>{{ rs.description }}</td>
+                <td><img src="{{ asset('uploads') }}/images/{{ rs.image }}" height="60"> </td>
+                <td>{{ rs.price }}</td>
+                <td>{{ rs.status }}</td>
+                <td>  <a href="{{ path('room_edit', {'id': rs.id,'hid': rs.hotelid}) }}" class="btn btn-block btn-primary">Düzenle</a></td>
+                <td>
+                    <form method="post" action="{{ path('room_delete', {'id': rs.id,'hid': rs.hotelid}) }}" onsubmit="return confirm('Silmek İstediğinize Emin misiniz?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rs.id) }}">
+
+                        <button class="btn btn-block btn-danger">Sil</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Sonuç Bulunamadı.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+

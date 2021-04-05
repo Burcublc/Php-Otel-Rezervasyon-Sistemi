@@ -1,0 +1,7 @@
+
+<form method="post" action="{{ path('hotel_delete', {'id': hotel.id}) }}" onsubmit="return confirm('Silmek İstediğinize Emin misiniz?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ hotel.id) }}">
+
+    <button class="btn btn-block btn-danger">Sil</button>
+</form>

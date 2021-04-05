@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<title>Image</title>
+
+{% block body %}
+    <h1>Image</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ image.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ image.title }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ image.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('image_index') }}">Geri Listeye Dön</a>
+
+    <a href="{{ path('image_edit', {'id': image.id}) }}">Düzenle</a>
+
+    {{ include('yonetici/image/_delete_form.html.twig') }}
+{% endblock %}

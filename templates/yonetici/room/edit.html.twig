@@ -1,0 +1,98 @@
+
+<link rel="stylesheet" href="{{ asset('assets') }}/yonetici/plugins/fontawesome-free/css/all.min.css">
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+<link rel="stylesheet" href="{{ asset('assets') }}/yonetici/dist/css/adminlte.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<div class="card card-primary">
+    <font size="6" color="#a52a2a" ><b>{{ hotel.title }}/{{ r.title }} Düzenleme Formu</b></font>
+    <hr>
+
+    <form role="form" name="room"  method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Oda İsim</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"  name="title" value="{{ r.title}}" maxlength="50" >
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Açıklama</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"  name="description"  value="{{ r.description }}" maxlength="50">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Ücret</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"  name="price" value="{{ r.price }}" maxlength="50">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Oda Sayısı</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="numberofroom"  value="{{ r.numberofroom }}" maxlength="50">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Durum</label>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control"  name="status" >
+                        <option value="{{ r.status }}" >{{ r.status }}</option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Pasif">Pasif</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="exampleInputEmail1">Oda Resim Galerisi</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="custum-file">
+                            <input class="custom-file-input" type="file" id="room_image" name="room[image]" value="{{ r.image }}" >
+                            <label class="custom-file-label" for="exampleInputFile">Dosya Seç</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="hidden" name="token" value="{{  csrf_token('roomy') }}" />
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

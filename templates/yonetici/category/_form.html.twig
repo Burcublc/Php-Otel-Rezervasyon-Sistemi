@@ -1,0 +1,51 @@
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kategori Düzenleme Formu</font></font></h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form name="category" role="form" method="post">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Parent Id</label>
+                <select id="category_parentid"  name="category[parentid]" class="form-control">
+                    <option value="0">Ana Kategori</option>
+                    {% for cat in categories %}
+                        <option value="cat.id" {{ cat.id==category.parentid ? ' Selected': '' }}>{{ cat.title }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Başlık</font></font></label>
+                <input type="text" class="form-control" id="category_title" name="category[title]" maxlength="150" value="{{ category.title }}" >
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Anahtar Kelimeler</font></font></label>
+                <input type="text" class="form-control" id="category_keywords" name="category[keywords]" maxlength="255" value="{{ category.keywords }}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tanımlamalar</font></font></label>
+                <input type="text" class="form-control" id="category_description" name="category[description]" maxlength="255" value="{{ category.description }}" >
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Resim</font></font></label>
+                <input type="text" class="form-control" id="category_image" name="category[image]" maxlength="100" value="{{ category.image }}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Durum</font></font></label>
+                <select id="category_status"  name="category[status]" class="form-control" value="{{ category.status }}">
+                    <option>{{ category.status }}</option>
+                    <option >Aktif</option>
+                    <option >Aktif Değil</option>
+                </select>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kaydet</font></font></button>
+        </div>
+
+    </form>
+</div>

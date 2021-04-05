@@ -1,0 +1,94 @@
+{% extends 'yoneticibase.html.twig' %}
+
+{% block title %}Kategori Anasayfası{% endblock %}
+
+{% block body %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Kategori Oluşturma</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">AnaSayfa</a></li>
+                        <li class="breadcrumb-item active">Boş Sayfa </li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kategori Listesi</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="card-body">
+
+
+                <table class="table table-bordered"><!--bu tabloyu templaten aldım. table class ismini alıp buraya yapıştırdım-->
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Parentid</th>
+                            <th>Başlık</th>
+                            <th>Anahtar Kelimeler</th>
+                            <th>Tanımlamalar</th>
+                            <th>Resim</th>
+                            <th>Durum</th>
+                            <th>Seçim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.parentid }}</td>
+                            <td>{{ category.title }}</td>
+                            <td>{{ category.keywords }}</td>
+                            <td>{{ category.description }}</td>
+                            <td>{{ category.image }}</td>
+                            <td>{{ category.status }}</td>
+                            <td>
+                                <a href="{{ path('category_show', {'id': category.id}) }}">Göster</a>
+                                <a href="{{ path('category_edit', {'id': category.id}) }}">Düzenle</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">Sonuç Bulunamadı.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('category_new') }}">Yeni Oluştur</a>
+
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+    <!-- /.content-wrapper -->
+{% endblock %}
